@@ -1,0 +1,32 @@
+mediterranean = {
+
+	slot = 6
+	generic = yes
+	ai = yes
+	
+	potential = {
+		capital_scope = {
+			continent = europe
+		}
+	}
+	has_country_shield = no
+	
+	med_launch_navy = {
+		icon = mission_galleys_in_port
+		required_missions = { }
+		position = 1
+		
+		trigger = {
+			has_medi_port = yes
+			
+		}
+		
+		effect = {
+			add_prestige = 30
+			add_country_modifier = {
+				name = "gen_eur_trade_node_mod"
+				duration = 7300
+			}
+		}
+	}
+}

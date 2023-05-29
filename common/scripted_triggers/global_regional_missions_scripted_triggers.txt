@@ -1,0 +1,17 @@
+
+# has_medi_port = {
+	# custom_trigger_tooltip = {
+		# tooltip = has_medi_port
+		# any_owned_province = {
+		# }
+	# }
+# }
+#or{}
+
+has_medi_port = {
+	any_owned_province = {
+		sea_zone = {
+			region = mediterrenean_region 
+		}
+	}
+}
