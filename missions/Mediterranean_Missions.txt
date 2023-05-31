@@ -1,19 +1,16 @@
-mediterranean = {
+mediterranean_generic = {
 
 	slot = 6
 	generic = yes
 	ai = yes
 	
 	potential = {
-		capital_scope = {
-			continent = europe
-		}
+		has_country_flag = medi_gen_missions
 	}
 	has_country_shield = no
 	
 	med_launch_navy = {
 		icon = mission_galleys_in_port
-		required_missions = { }
 		position = 1
 		
 		trigger = {
@@ -27,6 +24,62 @@ mediterranean = {
 				name = "gen_eur_trade_node_mod"
 				duration = 7300
 			}
+		}
+	}
+	test_medi_gen_2 = {
+		position = 2
+		icon = mission_religious
+
+		trigger = {
+			always = no
+		}
+
+		effect = {
+			add_prestige = 1
+		}
+	}
+}
+
+mediterranean_catholic = {
+	slot = 7
+	ai = yes
+
+	potential = {
+		has_country_flag = medi_catholic_missions
+	}
+
+	test_medi_catholic_1 = {
+		position = 1
+		icon = mission_religious
+
+		trigger = {
+			always = no
+		}
+
+		effect = {
+			add_prestige = 1
+		}
+	}
+}
+
+mediterranean_muslim = {
+	slot = 7
+	ai = yes
+
+	potential = {
+		has_country_flag = medi_muslim_missions
+	}
+
+	test_medi_muslim_1 = {
+		position = 1
+		icon = mission_religious
+
+		trigger = {
+			always = no
+		}
+
+		effect = {
+			add_prestige = 1
 		}
 	}
 }

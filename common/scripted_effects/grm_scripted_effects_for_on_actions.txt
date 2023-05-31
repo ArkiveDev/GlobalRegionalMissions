@@ -1,0 +1,34 @@
+
+initialize_global_regional_missions = { #Used in on_startup on_action
+	if = {
+		limit = { NOT = { has_country_flag = grm_init} }
+		set_country_flag = grm_init
+		if = { #mediterranean region
+			limit = { 
+				has_medi_port = yes
+			}
+			set_country_flag = medi_gen_missions
+			if = {
+				limit = { 
+					or = {
+						has_matching_religion = catholic 
+						religion_group = christian
+						has_unlocked_cult = christianity_cult
+					}
+				}
+				set_country_flag = medi_catholic_missions
+			}
+			if = {
+				limit = { 
+					or = {
+						has_matching_religion = TUR
+						religion_group = muslim
+						has_unlocked_cult = islam_cult
+					}
+				}
+				set_country_flag = medi_muslim_missions
+			}
+		}
+		swap_non_generic_missions = yes
+	}
+}
