@@ -6,36 +6,548 @@ mediterranean_generic = {
 	
 	potential = {
 		has_country_flag = medi_gen_missions
+		NOT = {
+			OR = {
+				has_country_flag = grm_medi_trade
+				has_country_flag = grm_medi_privateer
+				has_country_flag = grm_medi_transport
+			}
+		}
 	}
 	has_country_shield = no
 	
-	med_launch_navy = {
+	med_navy_invest = {
 		icon = mission_galleys_in_port
 		position = 1
 		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			sea_zone = {
+				region = mediterrenean_region 
+			}
+		}
+
 		trigger = {
-			has_medi_port = yes
+			any_owned_province = {
+				sea_zone = {
+					region = mediterrenean_region 
+				}
+				OR = {
+					has_building = shipyard
+					num_of_times_improved_by_owner = 4
+				}
+			}
 			
 		}
 		
 		effect = {
-			add_prestige = 30
-			add_country_modifier = {
-				name = "gen_eur_trade_node_mod"
-				duration = 7300
+			every_owned_province = {
+				limit = {
+					sea_zone = {
+						region = mediterrenean_region 
+					}
+					OR = {
+						has_building = shipyard
+						num_of_times_improved_by_owner = 4
+					}
+				}
+				add_province_modifier = {
+					name = "grm_local_shipbuilding_boom"
+					desc = grm_local_shipbuilding_boom_desc
+					duration = 3000
+				}
 			}
+			custom_tooltip = med_navy_interest_reward_event_tt
+			country_event = { id = global_regional_missions.1 }
 		}
 	}
-	test_medi_gen_2 = {
+	med_navy_branching_interest = {
 		position = 2
-		icon = mission_religious
+		icon = mission_unknown_mission
+
+		required_missions = { med_navy_invest }
 
 		trigger = {
-			always = no
+			custom_trigger_tooltip = {
+				tooltip = selectable_mission_trigger_tt
+				always = no
+			}
+			custom_trigger_tooltip = {
+				tooltip = med_navy_trade_interest_tt
+				OR = { #10% trade share in any Mediterranean node
+					# Western Mediterranean
+					1293 = { #Sevilla
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1295 = { #Valencia
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1298 = { # Genua
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					341 = { #Tunis
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1110 = { #Safi
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+
+					# Eastern Mediterranean
+					1308 = { # Venice
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					137 = { #Ragusa
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					358 = { #Alexandria
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1320 = { #Constantinople
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					377 = { #Aleppo
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = med_navy_privateer_interest_tt
+				OR = { #8% privateering share in any Mediterranean node
+					# Western Mediterranean
+					1293 = { #Sevilla
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1295 = { #Valencia
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1298 = { # Genua
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					341 = { #Tunis
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1110 = { #Safi
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+
+					# Eastern Mediterranean
+					1308 = { # Venice
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					137 = { #Ragusa
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					358 = { #Alexandria
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1320 = { #Constantinople
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					377 = { #Aleppo
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = med_navy_troops_interest_tt
+				OR = { #hostile tradigng in any Mediterranean node
+					# Western Mediterranean
+					trading_policy_in_node = {
+						node = 1293 #Sevilla
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1295 #Valencia
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1298  # Genua
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 341 #Tunis
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1110 #Safi
+						policy = hostile_trading
+					}
+
+					# Eastern Mediterranean
+					trading_policy_in_node = {
+						node = 1308 # Venice
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 137 #Ragusa
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 358 #Alexandria
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1320 #Constantinople
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 377 #Aleppo
+						policy = hostile_trading
+					}
+				}
+			}
+			num_of_transport = 10
 		}
 
 		effect = {
-			add_prestige = 1
+			
+		}
+	}
+}
+
+mediterranean_navy_trade = {
+
+	slot = 6
+	generic = yes
+	ai = yes
+	potential = {
+		has_country_flag = grm_medi_trade
+	}
+	med_navy_branching_interest_trade = {
+		position = 2
+		icon = mission_dominate_home_trade_node
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = med_navy_trade_interest_tt
+				OR = { #10% trade share in any Mediterranean node
+					# Western Mediterranean
+					1293 = { #Sevilla
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1295 = { #Valencia
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1298 = { # Genua
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					341 = { #Tunis
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1110 = { #Safi
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+
+					# Eastern Mediterranean
+					1308 = { # Venice
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					137 = { #Ragusa
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					358 = { #Alexandria
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					1320 = { #Constantinople
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+					377 = { #Aleppo
+						trade_share = {
+							country = ROOT
+							share = 10
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			random_owned_province = {
+				limit = {
+					sea_zone = {
+						region = mediterrenean_region 
+					}
+					OR = {
+						has_building = shipyard
+						num_of_times_improved_by_owner = 4
+					}
+				}
+				add_province_modifier = {
+					name = "grm_medi_trade_hub"
+					desc = grm_medi_trade_hub_desc
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+mediterranean_navy_privateer = {
+
+	slot = 6
+	generic = yes
+	ai = yes
+	potential = {
+		has_country_flag = grm_medi_privateer
+	}
+	med_navy_branching_interest_privateer = {
+		position = 2
+		icon = mission_pirate_fleet
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = med_navy_privateer_interest_tt
+				OR = { #8% privateering share in any Mediterranean node
+					# Western Mediterranean
+					1293 = { #Sevilla
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1295 = { #Valencia
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1298 = { # Genua
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					341 = { #Tunis
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1110 = { #Safi
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+
+					# Eastern Mediterranean
+					1308 = { # Venice
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					137 = { #Ragusa
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					358 = { #Alexandria
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					1320 = { #Constantinople
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+					377 = { #Aleppo
+						has_privateer_share_in_trade_node = {
+							who = PREV
+							share = 0.08
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			random_owned_province = {
+				limit = {
+					sea_zone = {
+						region = mediterrenean_region 
+					}
+					OR = {
+						has_building = shipyard
+						num_of_times_improved_by_owner = 4
+					}
+				}
+				add_province_modifier = {
+					name = "grm_medi_pirate_hub"
+					desc = grm_medi_trade_hub_desc
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+mediterranean_navy_transport = {
+
+	slot = 6
+	generic = yes
+	ai = yes
+	potential = {
+		has_country_flag = grm_medi_transport
+	}
+	med_navy_branching_interest_transport = {
+		position = 2
+		icon = mission_marines
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = med_navy_troops_interest_tt
+				OR = { #hostile tradigng in any Mediterranean node
+					# Western Mediterranean
+					trading_policy_in_node = {
+						node = 1293 #Sevilla
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1295 #Valencia
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1298  # Genua
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 341 #Tunis
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1110 #Safi
+						policy = hostile_trading
+					}
+
+					# Eastern Mediterranean
+					trading_policy_in_node = {
+						node = 1308 # Venice
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 137 #Ragusa
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 358 #Alexandria
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 1320 #Constantinople
+						policy = hostile_trading
+					}
+					trading_policy_in_node = {
+						node = 377 #Aleppo
+						policy = hostile_trading
+					}
+				}
+			}
+			num_of_transport = 10
+		}
+		effect = {
+			random_owned_province = {
+				limit = {
+					sea_zone = {
+						region = mediterrenean_region 
+					}
+					OR = {
+						has_building = shipyard
+						num_of_times_improved_by_owner = 4
+					}
+				}
+				add_province_modifier = {
+					name = "grm_medi_staging"
+					desc = grm_medi_trade_hub_desc
+					duration = -1
+				}
+			}
 		}
 	}
 }
@@ -73,6 +585,46 @@ mediterranean_muslim = {
 	test_medi_muslim_1 = {
 		position = 1
 		icon = mission_religious
+
+		trigger = {
+			always = no
+		}
+
+		effect = {
+			add_prestige = 1
+		}
+	}
+}
+
+mediterranean_generic_religion = {
+	slot = 7
+	ai = yes
+
+	potential = {
+		has_country_flag = medi_gen_missions
+	}
+	test_medi_gen_2_1 = {
+		position = 1
+		icon = mission_religious
+
+		trigger = {
+			always = no
+		}
+
+		effect = {
+			add_prestige = 1
+		}
+	}
+}
+
+mediterranean_gest_slot_6_low = {
+	slot = 6
+	potential = {
+		always = yes
+	}
+	test_medi_gen_6_3 = {
+		position =3
+		icon = mission_unknown_mission
 
 		trigger = {
 			always = no

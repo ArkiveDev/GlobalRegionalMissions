@@ -1,0 +1,6 @@
+Potential conflicts
+
+interface/countrymissionsview.gui
+common/on_actions.txt
+	on_startup
+	on_province_owner_change

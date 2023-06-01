@@ -1,0 +1,25 @@
+grm_local_shipbuilding_boom = {
+	local_ship_cost = -0.15
+	ship_recruit_speed = -0.20
+	local_prosperity_growth = 0.1
+}
+
+grm_medi_trade_hub = {
+	province_trade_power_modifier = 0.1
+	local_development_cost_modifier = -0.05
+	local_institution_spread = 0.05
+}
+
+grm_medi_pirate_hub = {
+	privateer_efficiency = 0.05
+	local_hostile_attrition = 1
+	hostile_fleet_attrition = 2
+	local_autonomy = 0.05
+}
+
+grm_medi_staging = {
+	supply_limit = 5
+	local_friendly_movement_speed = 0.15
+	regiment_recruit_speed = -0.2
+	local_garrison_size = 0.05
+}

@@ -1,0 +1,75 @@
+namespace = global_regional_missions
+
+country_event = {
+	id = global_regional_missions.1
+	title = global_regional_missions.1.t
+	desc = global_regional_missions.1.d
+	picture = HARBOUR_eventPicture
+
+	is_triggered_only = yes
+
+	option = { #trade
+		name = "grm_medi_choice_trade"
+		set_country_flag = grm_medi_trade
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 1.1
+				government = republic
+			}
+			modifier = {
+				factor = 1.1
+				has_government_attribute = enables_plutocratic_idea_group
+			}
+			modifier = {
+				factor = 2
+				has_idea_group = trade_ideas
+			}
+			modifier = {
+				factor = 2
+				has_idea_group = plutocracy_ideas
+			}
+		}
+	}
+	option = { #privateers
+		name = "grm_medi_choice_privateer"
+		set_country_flag = grm_medi_privateer
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 10
+				has_government_attribute = is_pirate_republic_reform
+			}
+			modifier = {
+				factor = 2
+				has_idea_group = spy_ideas
+			}
+		}
+
+	}
+	option = { #transport
+		name = "grm_medi_choice_troops"
+		set_country_flag = grm_medi_transport
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 2
+				government = monarchy
+			}
+			modifier = {
+				factor 10
+				OR = {
+					has_government_mechanic = militarization_mechanic
+					has_government_mechanic = prussian_militarization_mechanic_1
+					has_government_mechanic = prussian_militarization_mechanic_2
+					has_government_mechanic = prussian_militarization_mechanic_3
+				}
+			}
+		}
+	
+	}
+
+	after = {
+		swap_non_generic_missions = yes
+	}
+}
